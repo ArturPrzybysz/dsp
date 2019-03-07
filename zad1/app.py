@@ -1,11 +1,15 @@
-from zad1.signal_generators import sinusoidal_signal, gauss_noise, uniform_noise, half_wave_signal, full_wave_signal
+from zad1.signal_generators import sinusoidal_signal, gauss_noise, uniform_noise, half_wave_signal, full_wave_signal, \
+    rectangular_signal, unit_step_signal, impulse_signal, impulse_noise
 
 from zad1.plot import plot_signal
 
-s = gauss_noise(length=1500, mean=10, variance=0.1)
-# s = uniform_noise(length=15, low=-10, high=15)
-s = sinusoidal_signal(amp=3, t0=0, freq=1, duration=1)
+# s = gauss_noise(length=3000, mean=10, variance=0.1)
+# s = uniform_noise(length=3000, low=-10, high=15)
+# s = sinusoidal_signal(amp=3, t0=0, freq=1, duration=3)
 # s = half_wave_signal(amp=3, t0=0, freq=1, duration=3)
-s = full_wave_signal(amp=3, t0=0, freq=1, duration=3)
-
+# s = full_wave_signal(amp=3, t0=0, freq=1, duration=3)
+# s = unit_step_signal(amp=1, t0=0, duration=2, t_s=1)
+# s = impulse_signal(amp=1, t0=0, t_s=1.5, duration=2.0, sampling_rate=50)
+# s = impulse_noise(amp=1, t0=0, occurrence_probability=0.1, duration=2.0, sampling_rate=10)
+s = impulse_noise(amp=1, t0=0, occurrence_probability=0.1, duration=2.0, sampling_rate=10)
 plot_signal(s)

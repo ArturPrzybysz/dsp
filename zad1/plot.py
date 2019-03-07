@@ -10,8 +10,8 @@ def plot_signal(signal: Signal):
         plt.xlabel('t [s]')
         plt.ylabel(signal.name)
         plt.tight_layout()
-        plt.plot(time, signal.array)
+        plt.scatter(time, signal.array)
         plt.show()
     else:
-        plt.plot(signal.array)
+        plt.scatter(signal.array)
         plt.show()

@@ -1,6 +1,8 @@
 import numpy as np
 
 
+# TODO: consider adding time field?
+
 class Signal:
     array: np.array
     sampling_rate: int

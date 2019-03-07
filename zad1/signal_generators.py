@@ -36,3 +36,54 @@ def full_wave_signal(amp, t0, freq, duration, sampling_rate=SR):
     return Signal(array=np.abs(sin_signal),
                   name="half_wave(t)",
                   sampling_rate=sampling_rate)
+
+
+def unit_step_signal(amp, t0, duration, t_s, sampling_rate=SR):
+    time = np.linspace(t0, duration + t0, num=duration * sampling_rate)
+
+    def step_function(t):
+        if t > t_s:
+            return amp
+        elif t == t_s:
+            return amp / 2
+        else:
+            return 0
+
+    step_function_vectorized = np.vectorize(step_function)
+    return Signal(array=step_function_vectorized(time),
+                  name="unit step signal(t)",
+                  sampling_rate=sampling_rate)
+
+
+def impulse_signal(amp, t0, t_s, duration, sampling_rate=SR):
+    signal = np.zeros(int(duration * sampling_rate))
+    amp_idx = int((t_s - t0) * sampling_rate)
+    assert 0 <= amp_idx <= signal.size
+    signal[amp_idx] = amp
+    return Signal(array=signal,
+                  name="impulse signal",
+                  sampling_rate=sampling_rate)
+
+
+def impulse_noise(amp, t0, occurrence_probability, duration, sampling_rate=SR):
+    signal = (np.random.rand(int((duration - t0) * sampling_rate)) < occurrence_probability) * amp
+    return Signal(array=signal,
+                  name="impulse noise",
+                  sampling_rate=sampling_rate)
+
+
+def rectangular_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
+    single_rectangle_signal = np.zeros(sampling_rate * T)
+    single_rectangle_signal[0:T * k_w * sampling_rate] = amp
+    
+
+
+
+def rectangular_symmetric_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
+    pass
+    # TODO
+
+
+def triangular_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
+    pass
+    # TODO
