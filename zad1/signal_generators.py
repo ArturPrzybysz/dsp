@@ -18,6 +18,7 @@ def sinusoidal_signal(amp, t0, freq, duration, sampling_rate=SR):
     time = np.linspace(t0, duration + t0, num=duration * sampling_rate)
     return Signal(array=amp * np.sin(2 * np.pi * freq * (time - t0)),
                   name="sin(t)",
+                  freq=freq,
                   sampling_rate=sampling_rate)
 
 
@@ -27,6 +28,7 @@ def half_wave_signal(amp, t0, freq, duration, sampling_rate=SR):
     sin_abs = np.abs(sin_signal)
     return Signal(array=sin_signal + sin_abs,
                   name="half_wave(t)",
+                  freq=freq,
                   sampling_rate=sampling_rate)
 
 
@@ -35,6 +37,7 @@ def full_wave_signal(amp, t0, freq, duration, sampling_rate=SR):
     sin_signal = amp * np.sin(2 * np.pi * freq * (time - t0))
     return Signal(array=np.abs(sin_signal),
                   name="half_wave(t)",
+                  freq=freq,
                   sampling_rate=sampling_rate)
 
 
