@@ -73,17 +73,63 @@ def impulse_noise(amp, t0, occurrence_probability, duration, sampling_rate=SR):
 
 
 def rectangular_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
-    single_rectangle_signal = np.zeros(sampling_rate * T)
-    single_rectangle_signal[0:T * k_w * sampling_rate] = amp
-    
+    single_rectangle_signal = np.zeros(int(sampling_rate * T))
+    single_rectangle_signal[0:int(T * k_w * sampling_rate)] = amp
+
+    repetition_count = int(duration / T) + 1
+    signal = np.tile(single_rectangle_signal, repetition_count)
+
+    t = t0 % T
+    signal = signal[int(t * sampling_rate):int((t + duration) * sampling_rate)]
+
+    return Signal(array=signal,
+                  name="rectangular signal(t)",
+                  sampling_rate=sampling_rate)
 
 
+def rectangular_symmetrical_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
+    single_rectangle_signal = np.ones(int(sampling_rate * T)) * -amp
+    single_rectangle_signal[0:int(T * k_w * sampling_rate)] = amp
 
-def rectangular_symmetric_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
-    pass
-    # TODO
+    repetition_count = int(duration / T) + 1
+    signal = np.tile(single_rectangle_signal, repetition_count)
+
+    t = t0 % T
+    signal = signal[int(t * sampling_rate):int((t + duration) * sampling_rate)]
+
+    return Signal(array=signal,
+                  name="rectangular symmetrical signal(t)",
+                  sampling_rate=sampling_rate)
 
 
-def triangular_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
-    pass
-    # TODO
+def triangle_wave(amp, T, t0, duration, k_w, sampling_rate=SR):
+    time = np.linspace(0, T, num=T * sampling_rate)
+
+    def triangle_signal(t):
+        if t < T * k_w:
+            return t * amp / (T * k_w)
+        else:
+            return t * amp / ((k_w - 1) * T) - amp / (k_w - 1)
+
+    vectorized_tr_signal = np.vectorize(triangle_signal)
+    single_triangle_wave = vectorized_tr_signal(time)
+    repetition_count = int(duration / T) + 1
+    signal = np.tile(single_triangle_wave, repetition_count)
+
+    t = t0 % T
+    signal = signal[int(t * sampling_rate):int((t + duration) * sampling_rate)]
+
+    return Signal(array=signal,
+                  name="triangle wave signal(t)",
+                  sampling_rate=sampling_rate)
+
+# y = ax + b
+
+# 0 = a*T + b
+# amp = a * T*k_w + b
+# b = -a*T
+# a = (amp - b) / (T * k_w)
+# a = (amp -a*T) / T * k_w
+# a
+#
+#

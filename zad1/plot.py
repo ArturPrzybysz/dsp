@@ -15,3 +15,10 @@ def plot_signal(signal: Signal):
     else:
         plt.scatter(signal.array)
         plt.show()
+
+
+def plot_histogram(signal: Signal, bins=50):
+    plt.hist(signal.array, bins=bins)
+    plt.xlabel('t [s]')
+    plt.ylabel(signal.name)
+    plt.show()
