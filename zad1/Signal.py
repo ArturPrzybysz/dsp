@@ -21,28 +21,24 @@ class Signal:
 
     def add(self, s2):
         assert self.length == s2.length
-        assert self.sampling_rate == s2.sampling_rate
         return Signal(array=self.array + s2.array,
                       name="(" + self.name + " + " + s2.name + ")",
                       sampling_rate=self.sampling_rate)
 
     def subtract(self, s2):
         assert self.length == s2.length
-        assert self.sampling_rate == s2.sampling_rate
         return Signal(array=self.array - s2.array,
                       name="(" + self.name + " - " + s2.name + ")",
                       sampling_rate=self.sampling_rate)
 
     def multiply(self, s2):
         assert self.length == s2.length
-        assert self.sampling_rate == s2.sampling_rate
         return Signal(array=self.array * s2.array,
                       name="(" + self.name + " * " + s2.name + ")",
                       sampling_rate=self.sampling_rate)
 
     def divide(self, s2):
         assert self.length == s2.length
-        assert self.sampling_rate == s2.sampling_rate
         array = np.divide(self.array, s2.array)
         normalized_array = np.nan_to_num(array)
         return Signal(array=normalized_array,
@@ -50,7 +46,6 @@ class Signal:
                       sampling_rate=self.sampling_rate)
 
     def append(self, s2):
-        assert self.sampling_rate == s2.sampling_rate
         return Signal(array=np.append(self.array, s2.array),
                       name="[" + self.name + " then " + s2.name + "]",
                       sampling_rate=self.sampling_rate)

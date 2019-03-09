@@ -3,6 +3,14 @@ import numpy as np
 from zad1.Signal import Signal
 
 
+def show_stats(signal):
+    print("Mean:", mean(signal))
+    print("Mean abs:", mean_abs(signal))
+    print("Mean power:", mean_power(signal))
+    print("Variance:", variance(signal))
+    print("RMS:", root_mean_square(signal))
+
+
 def _t2_from_freq(signal):
     T = 1 / signal.freq
     samples_in_period = T * signal.sampling_rate

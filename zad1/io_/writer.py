@@ -8,8 +8,8 @@ wav_ext = ".wav"
 
 def write_wav(signal: Signal, filename: str = None):
     if filename is None:
-        filename = signal.name + wav_ext
+        filename = signal.name
     file_address = join(ROOT, "data", filename)
-    if filename[-4:] is not wav_ext:
-        filename += wav_ext
+    if file_address[-4:] != wav_ext:
+        file_address += wav_ext
     write(file_address, signal.sampling_rate, signal.array)

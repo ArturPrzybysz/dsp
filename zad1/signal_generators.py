@@ -14,7 +14,7 @@ def gauss_noise(length: int, mean: float, variance: float):
                   name="gaussian_noise")
 
 
-def sinusoidal_signal(amp, t0, freq, duration, sampling_rate=SR):
+def sinusoidal_signal(amp, freq, duration, t0=0, sampling_rate=SR):
     time = np.linspace(t0, t0 + duration, num=duration * sampling_rate)
     array = amp * np.sin(2 * np.pi * freq * time)
     return Signal(array=array,
@@ -23,7 +23,7 @@ def sinusoidal_signal(amp, t0, freq, duration, sampling_rate=SR):
                   sampling_rate=sampling_rate)
 
 
-def half_wave_signal(amp, t0, freq, duration, sampling_rate=SR):
+def half_wave_signal(amp, freq, duration, t0=0, sampling_rate=SR):
     time = np.linspace(t0, t0 + duration, num=duration * sampling_rate)
     sin_signal = amp * np.sin(2 * np.pi * freq * time)
     sin_abs = np.abs(sin_signal)
@@ -33,7 +33,7 @@ def half_wave_signal(amp, t0, freq, duration, sampling_rate=SR):
                   sampling_rate=sampling_rate)
 
 
-def full_wave_signal(amp, t0, freq, duration, sampling_rate=SR):
+def full_wave_signal(amp, freq, duration, t0=0, sampling_rate=SR):
     time = np.linspace(0, duration, num=duration * sampling_rate)
     sin_signal = amp * np.sin(2 * np.pi * freq * (time - t0))
     return Signal(array=np.abs(sin_signal),
@@ -42,7 +42,7 @@ def full_wave_signal(amp, t0, freq, duration, sampling_rate=SR):
                   sampling_rate=sampling_rate)
 
 
-def unit_step_signal(amp, t0, duration, t_s, sampling_rate=SR):
+def unit_step_signal(amp, duration, t_s, t0=0, sampling_rate=SR):
     time = np.linspace(t0, duration + t0, num=duration * sampling_rate)
 
     def step_function(t):
@@ -59,7 +59,7 @@ def unit_step_signal(amp, t0, duration, t_s, sampling_rate=SR):
                   sampling_rate=sampling_rate)
 
 
-def impulse_signal(amp, t0, t_s, duration, sampling_rate=SR):
+def impulse_signal(amp, t_s, duration, t0=0, sampling_rate=SR):
     signal = np.zeros(int(duration * sampling_rate))
     amp_idx = int((t_s - t0) * sampling_rate)
     assert 0 <= amp_idx <= signal.size
@@ -69,14 +69,14 @@ def impulse_signal(amp, t0, t_s, duration, sampling_rate=SR):
                   sampling_rate=sampling_rate)
 
 
-def impulse_noise(amp, t0, occurrence_probability, duration, sampling_rate=SR):
+def impulse_noise(amp, occurrence_probability, duration, t0=0, sampling_rate=SR):
     signal = (np.random.rand(int((duration - t0) * sampling_rate)) < occurrence_probability) * amp
     return Signal(array=signal,
                   name="impulse_noise",
                   sampling_rate=sampling_rate)
 
 
-def rectangular_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
+def rectangular_signal(amp, T, duration, k_w, t0=0, sampling_rate=SR):
     single_rectangle_signal = np.zeros(int(sampling_rate * T))
     single_rectangle_signal[0:int(T * k_w * sampling_rate)] = amp
 
@@ -91,7 +91,7 @@ def rectangular_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
                   sampling_rate=sampling_rate)
 
 
-def rectangular_symmetrical_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
+def rectangular_symmetrical_signal(amp, T, duration, k_w, t0=0, sampling_rate=SR):
     single_rectangle_signal = np.ones(int(sampling_rate * T)) * -amp
     single_rectangle_signal[0:int(T * k_w * sampling_rate)] = amp
 
@@ -106,7 +106,7 @@ def rectangular_symmetrical_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
                   sampling_rate=sampling_rate)
 
 
-def triangle_wave(amp, T, t0, duration, k_w, sampling_rate=SR):
+def triangle_wave(amp, T, duration, k_w, t0=0, sampling_rate=SR):
     time = np.linspace(0, T, num=T * sampling_rate)
 
     def triangle_signal(t):
@@ -126,14 +126,3 @@ def triangle_wave(amp, T, t0, duration, k_w, sampling_rate=SR):
     return Signal(array=signal,
                   name="triangle_wave_signal(t)",
                   sampling_rate=sampling_rate)
-
-# y = ax + b
-
-# 0 = a*T + b
-# amp = a * T*k_w + b
-# b = -a*T
-# a = (amp - b) / (T * k_w)
-# a = (amp -a*T) / T * k_w
-# a
-#
-#
