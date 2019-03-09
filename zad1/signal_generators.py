@@ -37,7 +37,7 @@ def full_wave_signal(amp, t0, freq, duration, sampling_rate=SR):
     time = np.linspace(0, duration, num=duration * sampling_rate)
     sin_signal = amp * np.sin(2 * np.pi * freq * (time - t0))
     return Signal(array=np.abs(sin_signal),
-                  name="full wave(t)",
+                  name="full_wave(t)",
                   freq=freq,
                   sampling_rate=sampling_rate)
 
@@ -55,7 +55,7 @@ def unit_step_signal(amp, t0, duration, t_s, sampling_rate=SR):
 
     step_function_vectorized = np.vectorize(step_function)
     return Signal(array=step_function_vectorized(time),
-                  name="unit step signal(t)",
+                  name="unit_step_signal(t)",
                   sampling_rate=sampling_rate)
 
 
@@ -65,14 +65,14 @@ def impulse_signal(amp, t0, t_s, duration, sampling_rate=SR):
     assert 0 <= amp_idx <= signal.size
     signal[amp_idx] = amp
     return Signal(array=signal,
-                  name="impulse signal",
+                  name="impulse_signal",
                   sampling_rate=sampling_rate)
 
 
 def impulse_noise(amp, t0, occurrence_probability, duration, sampling_rate=SR):
     signal = (np.random.rand(int((duration - t0) * sampling_rate)) < occurrence_probability) * amp
     return Signal(array=signal,
-                  name="impulse noise",
+                  name="impulse_noise",
                   sampling_rate=sampling_rate)
 
 
@@ -87,7 +87,7 @@ def rectangular_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
     signal = signal[int(t * sampling_rate):int((t + duration) * sampling_rate)]
 
     return Signal(array=signal,
-                  name="rectangular signal(t)",
+                  name="rectangular_signal(t)",
                   sampling_rate=sampling_rate)
 
 
@@ -102,7 +102,7 @@ def rectangular_symmetrical_signal(amp, T, t0, duration, k_w, sampling_rate=SR):
     signal = signal[int(t * sampling_rate):int((t + duration) * sampling_rate)]
 
     return Signal(array=signal,
-                  name="rectangular symmetrical signal(t)",
+                  name="rectangular_symmetrical_signal(t)",
                   sampling_rate=sampling_rate)
 
 
@@ -124,7 +124,7 @@ def triangle_wave(amp, T, t0, duration, k_w, sampling_rate=SR):
     signal = signal[int(t * sampling_rate):int((t + duration) * sampling_rate)]
 
     return Signal(array=signal,
-                  name="triangle wave signal(t)",
+                  name="triangle_wave_signal(t)",
                   sampling_rate=sampling_rate)
 
 # y = ax + b
