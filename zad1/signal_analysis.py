@@ -6,11 +6,12 @@ from zad1.Signal import Signal
 def _t2_from_freq(signal):
     T = 1 / signal.freq
     samples_in_period = T * signal.sampling_rate
-    return signal.length - signal.length % samples_in_period
+    return int(signal.length - signal.length % samples_in_period)
 
 
 def _interval(signal, t1, t2, use_freq):
     if use_freq:
+        assert signal.freq is not None
         return 0, _t2_from_freq(signal)
     elif t2 is not None:
         return t1, t2

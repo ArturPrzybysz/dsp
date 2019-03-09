@@ -16,3 +16,9 @@ class Signal:
         self.length = array.size
         self.sampling_rate = sampling_rate
         self.freq = freq
+
+    def add(self, s2):
+        assert self.length == s2.length
+        return Signal(array=self.array + s2.array,
+                      name="(" + self.name + " + " + s2.name + ")"
+                      )
