@@ -24,6 +24,6 @@ def plot_signal(signal: Signal, scatter=False, title=None):
 def plot_histogram(signal: Signal, bins=50, title=None):
     plt.hist(signal.array, bins=bins)
     plt.title = title
-    plt.xlabel('t [s]')
-    plt.ylabel(signal.name)
+    plt.xlabel("value")
+    plt.ylabel("occurrences")
     plt.show()

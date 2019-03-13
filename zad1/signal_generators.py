@@ -4,14 +4,16 @@ from zad1.Signal import Signal
 from zad1.config import SR
 
 
-def uniform_noise(length: int, low: int, high: int):
-    return Signal(array=np.random.uniform(low, high, length),
-                  name="uniform_noise")
+def uniform_noise(duration, sampling_rate, low: int, high: int):
+    return Signal(array=np.random.uniform(low, high, duration * sampling_rate),
+                  name="uniform_noise",
+                  sampling_rate=sampling_rate)
 
 
-def gauss_noise(length: int, mean: float, variance: float):
-    return Signal(array=np.random.normal(mean, variance, length),
-                  name="gaussian_noise")
+def gauss_noise(duration, sampling_rate, mean: float, variance: float):
+    return Signal(array=np.random.normal(mean, variance, duration * sampling_rate),
+                  name="gaussian_noise",
+                  sampling_rate=sampling_rate)
 
 
 def sinusoidal_signal(amp, freq, duration, t0=0, sampling_rate=SR):

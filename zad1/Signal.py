@@ -12,7 +12,7 @@ class Signal:
     length: int
     freq: float
 
-    def __init__(self, array: np.array, name: str, sampling_rate=None, freq=None):
+    def __init__(self, array: np.array, name: str, sampling_rate, freq=None):
         self.array = array
         self.name = name
         self.length = array.size

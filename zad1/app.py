@@ -11,8 +11,9 @@ from zad1.plot import plot_signal, plot_histogram
 sr = 22000
 duration = 2
 
-s1 = sinusoidal_signal(amp=3000, freq=440, sampling_rate=sr, duration=duration)
-s2 = gauss_noise(length=duration * sr, mean=0, variance=100)
+s1 = uniform_noise(duration=duration, sampling_rate=sr, low=0, high=50)
+# s1 = sinusoidal_signal(amp=300, freq=440, sampling_rate=sr, duration=duration)
+s2 = gauss_noise(duration=duration, sampling_rate=sr, mean=0, variance=30)
 
 plot_signal(s1, title="sinusoida")
 plot_signal(s2, scatter=True, title="gauss")
