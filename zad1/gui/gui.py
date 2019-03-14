@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from zad1.signals_from_gui import create_signals
+from zad1.gui.signals_from_gui import create_signals
 
 def showGui():
     layout = [
