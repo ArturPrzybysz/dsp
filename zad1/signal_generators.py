@@ -1,5 +1,4 @@
 import numpy as np
-
 from zad1.Signal import Signal
 from zad1.config import SR
 
@@ -29,7 +28,7 @@ def half_wave_signal(amp, freq, duration, t0=0, sampling_rate=SR):
     time = np.linspace(t0, t0 + duration, num=duration * sampling_rate)
     sin_signal = amp * np.sin(2 * np.pi * freq * time)
     sin_abs = np.abs(sin_signal)
-    return Signal(array=sin_signal + sin_abs,
+    return Signal(array=(0.5) *(sin_signal + sin_abs),
                   name="half wave(t)",
                   freq=freq,
                   sampling_rate=sampling_rate)
