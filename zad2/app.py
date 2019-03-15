@@ -12,5 +12,15 @@ from zad2.similarity_measures import signal_to_noise_ratio, mean_squared_error, 
     compare_signals
 
 s1 = sinusoidal_signal(amp=10, freq=1, duration=1.01, sampling_rate=200)
+s2 = quantization_with_rounding(s1, bins=8)
+
+plot_signals(s1, s2)
+compare_signals(s1, s2)
 
 analyze_sampling_params(range(1, 100), s1)
+
+# TODO:
+#   1. ENOB
+#   2. sinc reconstruction
+#
+#

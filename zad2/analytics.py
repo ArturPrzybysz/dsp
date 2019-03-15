@@ -13,8 +13,9 @@ def analyze_sampling_params(bins, pure_signal: Signal):
     stn_values = []
     pstn_values = []
     md_values = []
-    for bin in bins:
-        quantized_signal = quantization_with_rounding(pure_signal, bins=bin)
+    for b in bins:
+        quantized_signal = quantization_with_rounding(pure_signal, bins=b)
+        
         mse_values.append(mean_squared_error(pure_signal, quantized_signal))
         stn_values.append(signal_to_noise_ratio(pure_signal, quantized_signal))
         pstn_values.append(peak_signal_to_noise_ratio(pure_signal, quantized_signal))
