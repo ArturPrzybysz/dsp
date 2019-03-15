@@ -17,7 +17,7 @@ def _t2_from_freq(signal):
     return int(signal.length - signal.length % samples_in_period)
 
 
-def _interval(signal, t1, t2, use_freq):
+def _interval(signal: Signal, t1, t2, use_freq):
     if use_freq:
         assert signal.freq is not None
         return 0, _t2_from_freq(signal)

@@ -1,23 +1,18 @@
 import matplotlib.pylab as plt
-import numpy as np
-
 from zad1.Signal import Signal
+
+plt.tight_layout()
 
 
 def plot_signal(signal: Signal, scatter=False, title=None):
     plt.title = title
-    if signal.sampling_rate:
-        time = np.linspace(0, signal.length / signal.sampling_rate, num=signal.length)
-        plt.xlabel('t [s]')
-        plt.ylabel(signal.name)
-        plt.tight_layout()
-        if scatter:
-            plt.scatter(time, signal.array)
-        else:
-            plt.plot(time, signal.array)
-        plt.show()
+    plt.xlabel('t [s]')
+    plt.ylabel(signal.name)
+    if scatter:
+        plt.scatter(signal.time, signal.array, color='r', s=1.2)
     else:
-        plt.plot(signal.array)
+        plt.plot(signal.time, signal.array)
+
     plt.show()
 
 
@@ -26,4 +21,15 @@ def plot_histogram(signal: Signal, bins=50, title=None):
     plt.title = title
     plt.xlabel("value")
     plt.ylabel("occurrences")
+    plt.show()
+
+
+def plot_signals(analog: Signal, digital: Signal, title=None):
+    plt.title = title
+    plt.xlabel('t [s]')
+    plt.ylabel('y(t)')
+
+    plt.scatter(digital.time, digital.array, color='r', s=1)
+    plt.plot(analog.time, analog.array, alpha=0.7)
+
     plt.show()

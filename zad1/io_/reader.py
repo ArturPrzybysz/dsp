@@ -1,3 +1,5 @@
+import numpy as np
+
 from zad1.Signal import Signal
 from scipy.io.wavfile import read
 from global_config import ROOT
@@ -19,4 +21,5 @@ def read_wav(filename: str, directory: str = None):
 
     return Signal(array=array,
                   sampling_rate=sampling_rate,
-                  name=name)
+                  name=name,
+                  time=np.linspace(0, array.size / sampling_rate, array.size))
