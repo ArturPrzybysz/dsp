@@ -4,21 +4,22 @@ from zad1.signal_analysis import show_stats
 from zad1.signal_generators import sinusoidal_signal, gauss_noise, uniform_noise, half_wave_signal, full_wave_signal, \
     rectangular_signal, unit_step_signal, impulse_signal, impulse_noise, rectangular_symmetrical_signal, triangle_wave
 
-from zad1.plot import plot_signals, plot_histogram
+from zad1.plot import plot_signals, plot_histogram, plot_signal
 from zad2.analytics import analyze_sampling_params
 from zad2.quantization import quantization_with_rounding
 from zad2.sampling import sample_signal
 from zad2.similarity_measures import signal_to_noise_ratio, mean_squared_error, peak_signal_to_noise_ratio, \
     compare_signals
+from zad2.upsampling import sinc_resampling
 
-s1 = sinusoidal_signal(amp=10, freq=1, duration=1.01, sampling_rate=200)
-s2 = quantization_with_rounding(s1, bins=8)
+s1 = sinusoidal_signal(amp=10, freq=1, duration=1, sampling_rate=200)
 
-plot_signals(s1, s2)
-compare_signals(s1, s2)
+s3 = sinc_resampling(s1, 0.8)
 
-analyze_sampling_params(range(1, 100), s1)
+plot_signal(s3)
+plot_signal(s1)
 
+plot_signals(s1, s3)
 # TODO:
 #   1. ENOB
 #   2. sinc reconstruction
