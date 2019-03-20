@@ -75,7 +75,7 @@ def impulse_signal(amp, t_s, duration, t0=0, sampling_rate=SR):
     return Signal(array=array,
                   name="impulse_signal",
                   sampling_rate=sampling_rate,
-                  time=np.linspace(0, duration, num=array.size))
+                  time=np.linspace(t0, t0 + duration, num=array.size))
 
 
 def impulse_noise(amp, occurrence_probability, duration, t0=0, sampling_rate=SR):

@@ -10,11 +10,13 @@ from zad2.quantization import quantization_with_rounding
 from zad2.sampling import sample_signal
 from zad2.similarity_measures import signal_to_noise_ratio, mean_squared_error, peak_signal_to_noise_ratio, \
     compare_signals
+
+
 from zad2.upsampling import sinc_resampling
 
-s1 = sinusoidal_signal(amp=10, freq=1, duration=1, sampling_rate=200)
+s1 = sinusoidal_signal(amp=-21, t0=12, freq=4, duration=2.1, sampling_rate=100)
 
-s3 = sinc_resampling(s1, 0.8)
+s3 = sinc_resampling(s1, 3)
 
 plot_signal(s3)
 plot_signal(s1)

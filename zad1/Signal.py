@@ -3,8 +3,6 @@ import numpy as np
 np.seterr(divide='ignore', invalid='ignore')
 
 
-# TODO: consider adding time field?
-
 class Signal:
     array: np.array
     time: np.array
