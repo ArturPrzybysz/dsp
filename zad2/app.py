@@ -13,9 +13,9 @@ from zad2.similarity_measures import signal_to_noise_ratio, mean_squared_error, 
 
 from zad2.upsampling import sinc_resampling
 
-s1 = sinusoidal_signal(amp=41, t0=0, freq=2, duration=2.1, sampling_rate=100)
+s1 = sinusoidal_signal(amp=41, t0=0.8, freq=33, duration=0.5, sampling_rate=1000)
 
-s3 = sinc_resampling(s1, 333)
+s3 = sinc_resampling(s1, 11)
 
 plot_signal(s3)
 plot_signal(s1)
