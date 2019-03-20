@@ -11,12 +11,11 @@ from zad2.sampling import sample_signal
 from zad2.similarity_measures import signal_to_noise_ratio, mean_squared_error, peak_signal_to_noise_ratio, \
     compare_signals
 
-
 from zad2.upsampling import sinc_resampling
 
-s1 = sinusoidal_signal(amp=-21, t0=12, freq=4, duration=2.1, sampling_rate=100)
+s1 = sinusoidal_signal(amp=41, t0=0, freq=2, duration=2.1, sampling_rate=100)
 
-s3 = sinc_resampling(s1, 3)
+s3 = sinc_resampling(s1, 333)
 
 plot_signal(s3)
 plot_signal(s1)
