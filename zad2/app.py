@@ -1,6 +1,3 @@
-from zad1.io_.reader import read_wav
-from zad1.io_.writer import write_wav
-from zad1.signal_analysis import show_stats
 from zad1.signal_generators import sinusoidal_signal, gauss_noise, uniform_noise, half_wave_signal, full_wave_signal, \
     rectangular_signal, unit_step_signal, impulse_signal, impulse_noise, rectangular_symmetrical_signal, triangle_wave
 
@@ -11,18 +8,20 @@ from zad2.sampling import sample_signal
 from zad2.similarity_measures import signal_to_noise_ratio, mean_squared_error, peak_signal_to_noise_ratio, \
     compare_signals
 
-from zad2.upsampling import sinc_resampling
+from zad2.upsampling import sinc_resampling_ideal, sinc_resampling_kernel
 
-s1 = sinusoidal_signal(amp=41, t0=0.8, freq=33, duration=0.5, sampling_rate=1000)
+s_perfect = sinusoidal_signal(amp=41, t0=0.8, freq=3, duration=0.5, sampling_rate=100)
+s_to_be_sampled = sinusoidal_signal(amp=41, t0=0.8, freq=3, duration=0.5, sampling_rate=50)
 
-s3 = sinc_resampling(s1, 11)
+remade = sinc_resampling_kernel(s_to_be_sampled, 1, 1)
 
-plot_signal(s3)
-plot_signal(s1)
+plot_signal(s_perfect, scatter=True)
+plot_signal(remade, scatter=True)
 
-plot_signals(s1, s3)
+plot_signals(s_perfect, remade)
+
+compare_signals(s_perfect, s_perfect)
+compare_signals(s_perfect, remade)
+
 # TODO:
 #   1. ENOB
-#   2. sinc reconstruction
-#
-#
