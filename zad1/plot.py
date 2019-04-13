@@ -29,7 +29,7 @@ def plot_signals(analog: Signal, digital: Signal, title=None):
     plt.xlabel('t [s]')
     plt.ylabel('y(t)')
 
-    plt.scatter(digital.time, digital.array, color='r', s=1)
-    plt.plot(analog.time, analog.array, alpha=0.7)
+    plt.scatter(digital.time, digital.array, color='r', s=0.8)
+    plt.scatter(analog.time, analog.array, alpha=0.7, s=0.8)
 
     plt.show()

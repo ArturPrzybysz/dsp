@@ -5,22 +5,20 @@ from zad1.plot import plot_signals, plot_histogram, plot_signal
 from zad2.analytics import analyze_sampling_params
 from zad2.quantization import quantization_with_rounding
 from zad2.sampling import sample_signal
-from zad2.similarity_measures import signal_to_noise_ratio, mean_squared_error, peak_signal_to_noise_ratio, \
-    compare_signals
+from zad2.similarity_measures import compare_signals
 
 from zad2.upsampling import sinc_resampling_ideal, sinc_resampling_kernel
 
-s_perfect = sinusoidal_signal(amp=41, t0=0.8, freq=3, duration=0.5, sampling_rate=100)
-s_to_be_sampled = sinusoidal_signal(amp=41, t0=0.8, freq=3, duration=0.5, sampling_rate=50)
+s_perfect = sinusoidal_signal(amp=41, t0=0, freq=1, duration=1, sampling_rate=200)
+s_to_be_sampled = sinusoidal_signal(amp=41, t0=0, freq=1, duration=1, sampling_rate=100)
 
-remade = sinc_resampling_kernel(s_to_be_sampled, 1, 1)
+remade = sinc_resampling_kernel(s_to_be_sampled, 2, 90)
 
 plot_signal(s_perfect, scatter=True)
 plot_signal(remade, scatter=True)
 
 plot_signals(s_perfect, remade)
 
-compare_signals(s_perfect, s_perfect)
 compare_signals(s_perfect, remade)
 
 # TODO:

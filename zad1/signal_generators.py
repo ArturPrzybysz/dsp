@@ -15,7 +15,8 @@ def gauss_noise(duration: float, sampling_rate, mean: float, variance: float):
     return Signal(array=array,
                   name="gaussian_noise",
                   sampling_rate=sampling_rate,
-                  time=np.linspace(0, duration, num=array.size))
+                  time=np.linspace(0, duration, num=array.size),
+                  duration=duration)
 
 
 def sinusoidal_signal(amp, freq, duration, t0=0, sampling_rate=SR):
@@ -25,7 +26,8 @@ def sinusoidal_signal(amp, freq, duration, t0=0, sampling_rate=SR):
                   name="sin(t)",
                   freq=freq,
                   sampling_rate=sampling_rate,
-                  time=time)
+                  time=time,
+                  duration=duration)
 
 
 def half_wave_signal(amp, freq, duration, t0=0, sampling_rate=SR):
@@ -36,7 +38,8 @@ def half_wave_signal(amp, freq, duration, t0=0, sampling_rate=SR):
                   name="half wave(t)",
                   freq=freq,
                   sampling_rate=sampling_rate,
-                  time=time)
+                  time=time,
+                  duration=duration)
 
 
 def full_wave_signal(amp, freq, duration, t0=0, sampling_rate=SR):
@@ -46,7 +49,8 @@ def full_wave_signal(amp, freq, duration, t0=0, sampling_rate=SR):
                   name="full_wave(t)",
                   freq=freq,
                   sampling_rate=sampling_rate,
-                  time=time)
+                  time=time,
+                  duration=duration)
 
 
 def unit_step_signal(amp, duration, t_s, t0=0, sampling_rate=SR):
@@ -64,7 +68,8 @@ def unit_step_signal(amp, duration, t_s, t0=0, sampling_rate=SR):
     return Signal(array=step_function_vectorized(time),
                   name="unit_step_signal(t)",
                   sampling_rate=sampling_rate,
-                  time=np.linspace(0, duration, num=duration * sampling_rate))
+                  time=np.linspace(0, duration, num=duration * sampling_rate),
+                  duration=duration)
 
 
 def impulse_signal(amp, t_s, duration, t0=0, sampling_rate=SR):
@@ -75,7 +80,8 @@ def impulse_signal(amp, t_s, duration, t0=0, sampling_rate=SR):
     return Signal(array=array,
                   name="impulse_signal",
                   sampling_rate=sampling_rate,
-                  time=np.linspace(t0, t0 + duration, num=array.size))
+                  time=np.linspace(t0, t0 + duration, num=array.size),
+                  duration=duration)
 
 
 def impulse_noise(amp, occurrence_probability, duration, t0=0, sampling_rate=SR):
@@ -83,7 +89,8 @@ def impulse_noise(amp, occurrence_probability, duration, t0=0, sampling_rate=SR)
     return Signal(array=array,
                   name="impulse_noise",
                   sampling_rate=sampling_rate,
-                  time=np.linspace(0, duration, num=array.size))
+                  time=np.linspace(0, duration, num=array.size),
+                  duration=duration)
 
 
 def rectangular_signal(amp, T, duration, k_w, t0=0, sampling_rate=SR):
@@ -99,7 +106,8 @@ def rectangular_signal(amp, T, duration, k_w, t0=0, sampling_rate=SR):
     return Signal(array=array,
                   name="rectangular_signal(t)",
                   sampling_rate=sampling_rate,
-                  time=np.linspace(0, duration, num=array.size))
+                  time=np.linspace(0, duration, num=array.size),
+                  duration=duration)
 
 
 def rectangular_symmetrical_signal(amp, T, duration, k_w, t0=0, sampling_rate=SR):
@@ -115,7 +123,8 @@ def rectangular_symmetrical_signal(amp, T, duration, k_w, t0=0, sampling_rate=SR
     return Signal(array=array,
                   name="rectangular_symmetrical_signal(t)",
                   sampling_rate=sampling_rate,
-                  time=np.linspace(0, duration, num=array.size))
+                  time=np.linspace(0, duration, num=array.size),
+                  duration=duration)
 
 
 def triangle_wave(amp, T, duration, k_w, t0=0, sampling_rate=SR):
@@ -138,4 +147,5 @@ def triangle_wave(amp, T, duration, k_w, t0=0, sampling_rate=SR):
     return Signal(array=signal,
                   name="triangle_wave_signal(t)",
                   sampling_rate=sampling_rate,
-                  time=time)
+                  time=time,
+                  duration=duration)
