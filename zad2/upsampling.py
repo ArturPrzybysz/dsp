@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from zad1.Signal import Signal
 
 
@@ -26,15 +27,19 @@ def sinc_resampling_kernel(signal: Signal, k: float, kernel_size: int):
     time = np.linspace(0, signal.duration, num=interpolated.size) * signal.sampling_rate
 
     for v in signal.array:
-        _k_lower = max(k_lower, 0)
-        _k_upper = min(k_upper, time.size)
+        _k_lower = int(max(k_lower, 0))
+        _k_upper = int(min(k_upper, time.size))
 
         added = v * np.sinc(time)
+        # plt.plot(np.arange(len(added)), added)
+        # plt.plot(_k_lower, 0, 'ro')
+        # plt.plot(_k_upper, 0, 'ro')
+        # plt.show()
         interpolated[_k_lower: _k_upper] += added[_k_lower: _k_upper]
 
         time = time - 1
-        k_lower += 1
-        k_upper += 1
+        k_lower += k
+        k_upper += k
 
     return Signal(array=interpolated,
                   sampling_rate=new_sr,

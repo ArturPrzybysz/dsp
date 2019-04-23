@@ -23,6 +23,13 @@ def signal_to_noise_ratio(pure_signal: Signal, noisy_signal: Signal):
     return p1 / p2
 
 
+def effective_number_of_bytes(pure_signal: Signal, noisy_signal: Signal):
+    snr = signal_to_noise_ratio(pure_signal, noisy_signal)
+    decibel_to_bits = 6.02
+    quantization_error = 1.76
+    return (snr - quantization_error) / decibel_to_bits
+
+
 def peak_signal_to_noise_ratio(pure_signal: Signal, noisy_signal: Signal):
     mse = mean_squared_error(pure_signal, noisy_signal)
     psnr = 10 * np.log10((np.max(pure_signal.array) ** 2) / mse)
