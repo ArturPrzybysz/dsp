@@ -20,7 +20,7 @@ def signal_to_noise_ratio(pure_signal: Signal, noisy_signal: Signal):
 
     p1 = mean_power(pure_signal)
     p2 = mean_power(Signal(noise, pure_signal.time, "", pure_signal.sampling_rate, duration=pure_signal.duration))
-    return p1 / p2
+    return 10 * np.log10(p1 / p2)
 
 
 def effective_number_of_bytes(pure_signal: Signal, noisy_signal: Signal):
