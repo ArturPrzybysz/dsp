@@ -26,7 +26,7 @@ class Signal:
                       name="(" + self.name + " + " + s2.name + ")",
                       sampling_rate=self.sampling_rate,
                       time=self.time,
-                      )
+                      duration=self.duration + s2.duration)
 
     def subtract(self, s2):
         assert self.length == s2.length

@@ -7,6 +7,7 @@ def sinc_resampling_ideal(signal: Signal, k: float):
     new_sr = signal.sampling_rate * k
     interpolated = np.zeros((int(signal.duration * new_sr)))
     time = np.linspace(0, signal.duration, num=interpolated.size) * signal.sampling_rate
+    time = time - 1
 
     for v in signal.array:
         added = v * np.sinc(time)
@@ -31,10 +32,6 @@ def sinc_resampling_kernel(signal: Signal, k: float, kernel_size: int):
         _k_upper = int(min(k_upper, time.size))
 
         added = v * np.sinc(time)
-        # plt.plot(np.arange(len(added)), added)
-        # plt.plot(_k_lower, 0, 'ro')
-        # plt.plot(_k_upper, 0, 'ro')
-        # plt.show()
         interpolated[_k_lower: _k_upper] += added[_k_lower: _k_upper]
 
         time = time - 1
