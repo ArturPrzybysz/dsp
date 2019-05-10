@@ -3,14 +3,14 @@ from zad1.Signal import Signal
 from zad1.config import SR
 
 
-def uniform_noise(duration, sampling_rate, low: int, high: int):
+def uniform_noise(duration, low: int, high: int, sampling_rate=SR):
     return Signal(array=np.random.uniform(low, high, duration * sampling_rate),
                   name="uniform_noise",
                   sampling_rate=sampling_rate,
                   time=np.linspace(0, duration, num=sampling_rate * duration))
 
 
-def gauss_noise(duration: float, sampling_rate, mean: float, variance: float):
+def gauss_noise(duration: float, mean: float, variance: float, sampling_rate=SR):
     array = np.random.normal(mean, variance, int(duration * sampling_rate))
     return Signal(array=array,
                   name="gaussian_noise",

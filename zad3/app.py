@@ -1,16 +1,20 @@
-from zad1.plot import plot_signal
-from zad1.signal_generators import sinusoidal_signal
-from zad3.Filter import Filter
+import numpy as np
+
+from zad1.signal_generators import sinusoidal_signal, gauss_noise
 from zad3.convolution import convolve, naive_convolve
+from zad3.filter_generators import low_pass_filter
 from zad3.plot_spectrum import plot_spectra
 
-s1 = sinusoidal_signal(amp=3, freq=300, duration=1, sampling_rate=1000, t0=0.3)
-s1 = s1.add(sinusoidal_signal(amp=2, freq=100, duration=1, sampling_rate=1000, t0=0.1))
-s1 = s1.add(sinusoidal_signal(amp=1, freq=50, duration=1, sampling_rate=1000, t0=0.2))
+s1 = gauss_noise(duration=1, mean=0, variance=5)
 
-plot_spectra(s1.array, mode="real")
-# f = Filter(3, "blackman")
-#
+plot_spectra(s1)
+f = low_pass_filter(length=101, f0=125)
+# plot_signal(f, scatter=False)
+plot_spectra(f)
+
+s2 = convolve(s1, f)
+plot_spectra(s2)
+
 # s2 = convolve(s1, f)
 # s3 = naive_convolve(s1, f)
 #
