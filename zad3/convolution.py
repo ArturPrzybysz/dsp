@@ -14,8 +14,31 @@ def convolve(s1: Signal, s2: Signal):
                   duration=duration)
 
 
+def correlate(s1: Signal, s2: Signal):
+    array = np.correlate(s1.array, s2.array, mode="full")
+    duration = len(array) / s1.sampling_rate
+    time = np.linspace(s1.time[0], s1.time[0] + duration, num=len(array))
+    return Signal(array=array,
+                  time=time,
+                  name="correlated(" + s1.name + " with " + s2.name + ")",
+                  sampling_rate=s1.sampling_rate,
+                  duration=duration)
+
+
 def naive_convolve(s1: Signal, s2: Signal):
     convolution_matrix = _convolution_matrix(s1.array, s2.array)
+    array = np.dot(convolution_matrix, s1.array)
+    duration = len(array) / s1.sampling_rate
+    time = np.linspace(s1.time[0], s1.time[0] + duration, num=len(array))
+    return Signal(array=array,
+                  time=time,
+                  name="convolved(" + s1.name + " with " + s2.name + ")",
+                  sampling_rate=s1.sampling_rate,
+                  duration=duration)
+
+
+def naive_correlate(s1: Signal, s2: Signal):
+    convolution_matrix = _convolution_matrix(np.flip(s1.array), s2.array)
     array = np.dot(convolution_matrix, s1.array)
     duration = len(array) / s1.sampling_rate
     time = np.linspace(s1.time[0], s1.time[0] + duration, num=len(array))

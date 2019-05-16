@@ -21,8 +21,7 @@ def read_wav(filename: str, directory: str = None):
 
     if len(array.shape) is not 1:
         array = array.ravel()[::array.shape[1]]
-
-    return Signal(array=array,
+    return Signal(array=np.array(array, dtype=np.float64),
                   sampling_rate=sampling_rate,
                   name=name,
                   time=np.linspace(0, array.size / sampling_rate, array.size),

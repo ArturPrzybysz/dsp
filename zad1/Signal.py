@@ -62,3 +62,14 @@ class Signal:
                       sampling_rate=self.sampling_rate,
                       time=new_time,
                       duration=self.duration + s2.duration)
+
+    def delay(self, time: float):
+        assert time >= 0
+        new_length = int((self.duration + time) * self.sampling_rate)
+        array = np.zeros((new_length,))
+        array[-len(self.array):] = self.array
+        return Signal(array=array,
+                      name=self.name,
+                      sampling_rate=self.sampling_rate,
+                      time=np.linspace(self.time[0], self.time[-1] + time, num=len(array)),
+                      duration=self.duration + time)

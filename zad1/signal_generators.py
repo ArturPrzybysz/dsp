@@ -1,6 +1,6 @@
 import numpy as np
 from zad1.Signal import Signal
-from zad1.config import SR
+from config import SR
 
 
 def uniform_noise(duration, low: int, high: int, sampling_rate=SR):
@@ -26,7 +26,7 @@ def sinusoidal_signal(amp, freq, duration, t0=0, sampling_rate=SR):
                   name="sin(t)",
                   freq=freq,
                   sampling_rate=sampling_rate,
-                  time=time,
+                  time=np.linspace(0, duration, num=duration * sampling_rate),
                   duration=duration)
 
 

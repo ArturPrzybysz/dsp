@@ -18,6 +18,8 @@ class Window:
             self.array = 0.53836 - 0.46164 * cos(2 * pi * time)
         elif window_type is "hanning":
             self.array = 0.5 - 0.5 * cos(2 * pi * time)
+        elif window_type is "none":
+            self.array = np.ones_like(time)
         else:
             raise Exception("unsupported window_type")
 
