@@ -23,24 +23,24 @@ def reverse_walsh_hadamard(x: np.ndarray):
     return r
 
 
-def fast_walsh_hadamard(xx: np.ndarray):
-    N = xx.size
+def fast_walsh_hadamard(x: np.ndarray):
+    N = x.size
     if N & (N - 1) != 0:
         raise ValueError("size of x must be a power of 2")
     else:
-        a = np.array([xx]).T
+        x = np.array([x]).T
         h = 1
         while h < N:
             for i in range(0, N, h * 2):
                 for j in range(i, i + h):
-                    x = a[j]
-                    y = a[j + h]
-                    a[j] = x + y
-                    a[j + h] = x - y
+                    p1 = x[j]
+                    p2 = x[j + h]
+                    x[j] = p1 + p2
+                    x[j + h] = p1 - p2
             h *= 2
-    a[:] = [k / N for k in a]
-    # print("fast",a)
-    return a
+        x[:] = [k / N for k in x]
+        # print("fast",a)
+        return x
 
 
 def generate_matrix(n):
